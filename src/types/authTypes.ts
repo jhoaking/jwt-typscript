@@ -3,7 +3,7 @@ export interface AuthType{
     user_id : number,
     name : string,
     email : string,
-    passsword : string
+    password : string
 }
 
-export type RegisterAuth = Pick<AuthType, 'name'| 'email' | 'passsword'>;
+export type RegisterAuth = Pick<AuthType, 'name'| 'email' | 'password'>;

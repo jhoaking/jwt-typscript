@@ -6,7 +6,7 @@ export class authMode{
     static  register = async (data : RegisterAuth):Promise<AuthType> =>{
         
         const query = 'INSERT INTO usuarios(name,email,password) VALUES(?,?,?)';
-        const values = [data.name,data.email,data.passsword];
+        const values = [data.name,data.email,data.password];
         const [rows] =  await pool.query<ResultSetHeader>(query,values);
         return {user_id : rows.insertId , ...data} 
     }
