@@ -7,7 +7,7 @@ export const validateAuth =  (req:Request & {user?:AuthType}, res : Response , n
     try {
         const token = req.cookies.access_token;
         if(!token){
-             res.status(400).json({message : 'el token no e encontro'});
+             res.status(400).json({message : 'el token no se encontro'});
              return;
         }
 

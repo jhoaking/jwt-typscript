@@ -75,7 +75,7 @@ const protectedUser = (req, res) => {
     res.status(200).json({ message: ' usuario autorizado', user });
 };
 exports.protectedUser = protectedUser;
-const logout = async (_req, res) => {
+const logout = (_req, res) => {
     res.clearCookie("access_token", { httpOnly: true, sameSite: "strict" })
         .status(200).json({ message: "Logout exitoso" });
 };

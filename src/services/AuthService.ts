@@ -6,7 +6,7 @@ import { AuthType } from '../types/authTypes';
 
 export const hasshedPassword = async (passsword : string): Promise<string> =>{
     try {
-        const hashed = await bcrypt.hash(passsword, SALT_ROUNDS);
+        const hashed = await bcrypt.hash(passsword, Number(SALT_ROUNDS));
         return hashed;
     } catch (error : any) {
         throw new Error("error al hashear la password");

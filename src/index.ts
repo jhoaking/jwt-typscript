@@ -8,6 +8,7 @@ app.use(cookieParser());
 
 app.use('/user',routerAuth);
 
+
 app.listen(PORT , () =>{
     console.log('server on port ',PORT);
 })

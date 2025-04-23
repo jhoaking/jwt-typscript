@@ -1,7 +1,4 @@
-
 import { AuthType } from "../authTypes";
-
-export {};
 
 declare global {
   namespace Express {
@@ -10,3 +7,4 @@ declare global {
     }
   }
 }
+export {};
