@@ -12,7 +12,7 @@ export class authMode{
     }
 
     static getByEmail = async (email : string): Promise<AuthType | null> =>{
-        const query = 'SELECT * FROM usuarios WHERE user_id = ?';
+        const query = 'SELECT * FROM usuarios WHERE email = ?';
         const [rows] = await pool.query<RowDataPacket[]>(query,[email]);
 
         if(rows.length === 0){

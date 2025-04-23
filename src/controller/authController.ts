@@ -36,6 +36,8 @@ export const regiterUser = async (req: Request,res : Response): Promise<void> =>
 
 export const login = async (req :Request,res: Response)=>{
     const {email,password} = req.body;
+    console.log(req.body);
+    
     try {
         if(!email || !password){
               res.status(400).json({message : 'falta la contraseña y el email'});
@@ -47,7 +49,7 @@ export const login = async (req :Request,res: Response)=>{
 
         if(!user){
              res.status(400).json({message : 'el email no esta registrado'})
-             return
+             return;
         }
 
         const validarPassword = await comparePassword(password, user.password);
