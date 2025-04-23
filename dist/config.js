@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SECRET_JWT_KEY = exports.SALT_ROUNDS = exports.DB_HOST = exports.DB_DATABASE = exports.DB_PASSWORD = exports.DB_USER = exports.DB_PORT = exports.PORT = void 0;
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
+exports.PORT = process.env.PORT || 3000;
+exports.DB_PORT = Number(process.env.DB_PORT) || 3306;
+exports.DB_USER = process.env.DB_USER || "root";
+exports.DB_PASSWORD = process.env.DB_PASSWORD || "mysqlcasa";
+exports.DB_DATABASE = process.env.DB_DATABSE || "usuarios_jwt_db";
+exports.DB_HOST = process.env.DB_HOST || "localhost";
+exports.SALT_ROUNDS = process.env.SALT_ROUNDS || 10;
+exports.SECRET_JWT_KEY = process.env.SECRET_JWT_KEY || "mi-poderosa-contra";
