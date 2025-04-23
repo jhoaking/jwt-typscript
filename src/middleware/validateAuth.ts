@@ -3,11 +3,12 @@ import { SECRET_JWT_KEY } from "../config";
 import { AuthType } from "../types/authTypes";
 import  jwt  from "jsonwebtoken";
 
-export const validateAuth = async (req:Request & {user?:AuthType}, res : Response , next : NextFunction) =>{
+export const validateAuth =  (req:Request & {user?:AuthType}, res : Response , next : NextFunction) =>{
     try {
         const token = req.cookies.access_token;
         if(!token){
-            return res.status(400).json({message : 'el token no e encontro'});
+             res.status(400).json({message : 'el token no e encontro'});
+             return;
         }
 
         const decoded = jwt.verify(token,SECRET_JWT_KEY) as AuthType;
@@ -16,6 +17,7 @@ export const validateAuth = async (req:Request & {user?:AuthType}, res : Respons
         next();
         return;
     } catch (error: any) {
-        return  res.status(500).json({message: 'no se vaido el token'})
+          res.status(500).json({message: 'no se vaido el token'})
+          return;
     }
 }

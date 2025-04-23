@@ -38,18 +38,22 @@ export const login = async (req :Request,res: Response)=>{
     const {email,password} = req.body;
     try {
         if(!email || !password){
-           return  res.status(400).json({message : 'falta la contraseña y el email'});
+              res.status(400).json({message : 'falta la contraseña y el email'});
+              return;
+             
         }
 
         const user = await authMode.getByEmail(email);
 
         if(!user){
-           return  res.status(400).json({message : 'el email no esta registrado'})
+             res.status(400).json({message : 'el email no esta registrado'})
+             return
         }
 
         const validarPassword = await comparePassword(password, user.password);
         if(!validarPassword){
-            return res.status(400).json({message : 'contraseña invalida'});
+             res.status(400).json({message : 'contraseña invalida'});
+             return
         }
 
         const token = createToken(user);
@@ -60,13 +64,13 @@ export const login = async (req :Request,res: Response)=>{
             maxAge: 1000 * 60 * 60,
           };
            
-          return res
+           res
           .status(200)
           .cookie('access_token',token,options)
           .json({message : 'login exitoso'})
         
     } catch (error: any) {
-       return  res.status(500).json({
+         res.status(500).json({
             message: "Error logeando el usuario",
             error: error.message,
           });
@@ -78,8 +82,14 @@ export const protectedUser =  (req : Request , res : Response) =>{
     const user = req.user as AuthType;
 
     if(!user){
-        return res.status(401).json({message : 'usuario no autorizado'});
+         res.status(401).json({message : 'usuario no autorizado'});
+         return;
     }
 
-     return res.status(200).json({message: ' usuario autorizado' , user})
+      res.status(200).json({message: ' usuario autorizado' , user})
+}
+
+export const logout =  (_req: Request ,res : Response) =>{
+      res.clearCookie("access_token", { httpOnly: true, sameSite: "strict" })
+     .status(200).json({ message: "Logout exitoso" });
 }
